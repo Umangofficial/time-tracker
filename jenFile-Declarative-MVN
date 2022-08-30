@@ -1,0 +1,21 @@
+pipeline{
+    agent any
+    
+    environment{
+      PATH = "C:\Program Files\apache-maven-3.8.4\bin:$PATH"
+    }
+    stages{
+        stage("Git Checkout")
+        {
+            steps{
+                git credentialsId: '8d2e67dc-b819-46c3-bfca-2a0bccc2942a', url: 'https://github.com/Umangofficial/time-tracker.git'
+            }
+        }        
+        stage("Maven Build")
+        {
+            steps{
+                sh "mvn clean package"
+            }
+        }
+    }
+}
